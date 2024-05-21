@@ -64,6 +64,14 @@ const ShowMediaContent = () => {
             <span>{mediaContent.views}</span>
           </div>
           <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Likes</span>
+            <span>{mediaContent.likes}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Comments</span>
+            <span>{mediaContent.comments}</span>
+          </div>
+          <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Create Time</span>
             <span>{new Date(mediaContent.createdAt).toString()}</span>
           </div>

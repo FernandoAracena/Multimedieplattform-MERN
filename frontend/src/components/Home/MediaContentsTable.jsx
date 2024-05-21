@@ -13,19 +13,16 @@ const MediaContentsTable = ({ mediaContents }) => {
             Type
           </th>
           <th className='border border-slate-600 rounded-md max-md:hidden bg-sky-800 text-white'>
-            Description
-          </th>
-          <th className='border border-slate-600 rounded-md max-md:hidden bg-sky-800 text-white'>
-            Content Url
-          </th>
-          <th className='border border-slate-600 rounded-md max-md:hidden bg-sky-800 text-white'>
             Tags
           </th>
           <th className='border border-slate-600 rounded-md max-md:hidden bg-sky-800 text-white'>
-            Publish Date
+            Views
           </th>
           <th className='border border-slate-600 rounded-md max-md:hidden bg-sky-800 text-white'>
-            Views
+            Likes
+          </th>
+          <th className='border border-slate-600 rounded-md max-md:hidden bg-sky-800 text-white'>
+            Comments
           </th>
           <th className='border border-slate-600 rounded-md bg-sky-800 text-white'>Operations</th>
         </tr>
@@ -33,28 +30,25 @@ const MediaContentsTable = ({ mediaContents }) => {
       <tbody>
         {mediaContents.map((mediaContent) => (
           <tr key={mediaContent._id} className='h-8'>
-            <td className='border border-slate-700 rounded-md text-center'>
+            <td className='text-center'>
               {mediaContent.title}
             </td>
-            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+            <td className='text-center max-md:hidden'>
               {mediaContent.type}
             </td>
-            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-              {mediaContent.description}
-            </td>
-            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-              {mediaContent.contentUrl}
-            </td>
-            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+            <td className='text-center max-md:hidden'>
               {mediaContent.tags}
             </td>
-            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-              {mediaContent.publishDate}
-            </td>
-            <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+            <td className='text-center max-md:hidden'>
               {mediaContent.views}
             </td>
-            <td className='border border-slate-700 rounded-md text-center'>
+            <td className='text-center max-md:hidden'>
+              {mediaContent.likes}
+            </td>
+            <td className='text-center max-md:hidden'>
+              {mediaContent.comments}
+            </td>
+            <td className='text-center'>
               <div className='flex justify-center gap-x-4'>
                 <Link to={`/mediaContents/details/${mediaContent._id}`}>
                   <BsInfoCircle className='text-2xl text-green-800' />

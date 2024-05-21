@@ -13,6 +13,8 @@ const EditMediaContent = () => {
   const [tags, setTags] = useState('');
   const [publishDate, setPublishDate] = useState('');
   const [views, setViews] = useState('');
+  const [likes, setLikes] = useState('');
+  const [comments, setComments] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {enqueueSnackbar} = useSnackbar();
@@ -23,13 +25,15 @@ const EditMediaContent = () => {
     axios
     .get(`http://localhost:5555/mediaContents/${id}`)
     .then((response) => {
-      setTitle(response.data.title)
-      setType(response.data.type)
-      setDescription(response.data.description)
-      setContentUrl(response.data.contentUrl)
-      setTags(response.data.tags)
-      setPublishDate(response.data.publishDate)
-      setViewstatus(response.data.views)
+      setTitle(response.data.mediaContent.title)
+      setType(response.data.mediaContent.type)
+      setDescription(response.data.mediaContent.description)
+      setContentUrl(response.data.mediaContent.contentUrl)
+      setTags(response.data.mediaContent.tags)
+      setPublishDate(response.data.mediaContent.publishDate.split('T')[0])
+      setViews(response.data.mediaContent.views)
+      setLikes(response.data.mediaContent.likes)
+      setComments(response.data.mediaContent.comments)
       setLoading(false);
     })
     .catch((error) => {
@@ -48,10 +52,12 @@ const EditMediaContent = () => {
       tags,
       publishDate,
       views,
+      likes,
+      comments,
     };
     setLoading(true);
     axios
-    .put(`http://localhost:5555/books/${id}`, data)
+    .put(`http://localhost:5555/mediaContents/${id}`, data)
     .then(() => {
       setLoading(false);
       enqueueSnackbar('Media Content successfully edited');
@@ -67,7 +73,7 @@ const EditMediaContent = () => {
   return (
     <div className='p-4'>
       <BackButton />
-      <h1 className='text-3xl my-4'>Edit Book</h1>
+      <h1 className='text-3xl my-4'>Edit Media Content</h1>
       {loading ? <Spinner /> : ''}
       <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
         <div className='my-4'>
@@ -130,6 +136,24 @@ const EditMediaContent = () => {
             type='number'
             value={views}
             onChange={(e) => setViews(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2  w-full '
+          />
+        </div>
+        <div className='my-4'>
+          <label className='text-xl mr-4 text-gray-500'>Likes</label>
+          <input
+            type='number'
+            value={likes}
+            onChange={(e) => setLikes(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2  w-full '
+          />
+        </div>
+        <div className='my-4'>
+          <label className='text-xl mr-4 text-gray-500'>Comments</label>
+          <input
+            type='number'
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
           />
         </div>

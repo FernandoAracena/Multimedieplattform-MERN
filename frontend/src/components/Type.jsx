@@ -15,14 +15,15 @@ const Type = ({ types, filterType, setFilterType }) => {
 			<div className="space-y-2">
 				<div className="flex flex-wrap gap-4">
 				{types.map((type) => (
-				<div key={type} className="flex items-center">
+				<div key={type} className={`flex items-center ${filterType.includes(type) ? 'text-white bg-sky-300 rounded pr-2 pl-2' : 'text-sky-800 bg-white'}`}>
 					<input
-                    className="form-checkbox text-sky-500 border-sky-300 rounded focus:ring-sky-500"
+                    className="form-checkbox"
                     type="checkbox"
                     value={type}
                     onChange={onChange}
+					checked={filterType.includes(type)}
                 	/>
-                <p className="text-sky-800 p-1 capitalize">{type}</p>
+                <p className=" p-1 capitalize">{type}</p>
 				</div>
 			))}
 				</div>

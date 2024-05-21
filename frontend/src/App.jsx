@@ -11,7 +11,7 @@ const App = () => {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/mediaContents/create' element={<CreateMediaContent/>}/>
-      <Route path='/mediaContents/deatils/:id' element={<ShowMediaContent/>}/>
+      <Route path='/mediaContents/details/:id' element={<ShowMediaContent/>}/>
       <Route path='/mediaContents/edit/:id' element={<EditMediaContent/>}/>
       <Route path='/mediaContents/delete/:id' element={<DeleteMediaContent/>}/>
   </Routes>

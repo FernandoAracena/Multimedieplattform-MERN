@@ -78,10 +78,12 @@ router.post('/', async (req, res) => {
             !req.body.contentUrl ||
             !req.body.tags ||
             !req.body.publishDate ||
-            !req.body.views
+            !req.body.views ||
+            !req.body.likes ||
+            !req.body.comments 
         ) {
             return res.status(400).send({
-                message: 'Send all the required fields: title, type, description, contentUrl, tags, publishDate, views',
+                message: 'Send all the required fields: title, type, description, contentUrl, tags, publishDate, views, likes, comments',
             });
         }
         const newMediaContent = {
@@ -92,6 +94,8 @@ router.post('/', async (req, res) => {
             tags: req.body.tags,
             publishDate: req.body.publishDate,
             views: req.body.views,
+            likes: req.body.likes,
+            comments: req.body.comments,
         };
         const mediaContent = await MediaContent.create(newMediaContent);
 
@@ -112,10 +116,12 @@ router.put('/:_id', async (req, res) => {
             !req.body.contentUrl ||
             !req.body.tags ||
             !req.body.publishDate ||
-            !req.body.views
+            !req.body.views ||
+            !req.body.likes ||
+            !req.body.comments
         ) {
             return res.status(400).send({
-                message: 'Send all the required fields: title, type, description, contentUrl, tags, publishDate, views',
+                message: 'Send all the required fields: title, type, description, contentUrl, tags, publishDate, views, likes, comments',
             });
         }
 

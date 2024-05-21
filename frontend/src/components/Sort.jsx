@@ -14,7 +14,12 @@ const Sort = ({ sort, setSort }) => {
 
 	return (
 		<div className="flex items-center">
-			<p>Views :</p>
+			<label>Sorter etter :</label>
+			<select onChange={onSelectChange}>
+				<option value="views">Views</option>
+				<option value="likes">Likes</option>
+				<option value="comments">Comments</option>
+			</select>
     		<button onClick={onArrowChange} className="ml-2">
         		<p>&uarr;</p>
     		</button>
