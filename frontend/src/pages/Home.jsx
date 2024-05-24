@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Spinner from '../components/Spinner';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AiOutlineEdit} from 'react-icons/ai';
 import {BsInfoCircle} from 'react-icons/bs';
 import {MdOutlineAddBox, MdOutlineDelete} from 'react-icons/md';
@@ -11,6 +11,7 @@ import Search from "../components/Search";
 import Type from "../components/Type";
 import Sort from "../components/Sort";
 import Pagination from "../components/Pagination";
+import {useAuth} from "../context/AuthContext";
 
 const Home = () => {
 	const [search, setSearch] = useState("");
@@ -20,6 +21,14 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
   const [obj, setObj] = useState({mediaContents:[]});
+  const {user, logout} = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user) {
+      navigate('/users/register');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     setLoading(true);
@@ -39,6 +48,16 @@ const Home = () => {
   
   return (
     <div className='p-4'>
+      <nav>
+        {user ? (
+          <>
+          <span>{user.name}</span>
+          <button onClick={logout}>Logout</button>
+          </>
+        ) : (
+          <Link to="/users/register">Login</Link>
+        )}
+      </nav>
       <div className='flex justify-center items-center gap-x-4'>
         <button
           className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'

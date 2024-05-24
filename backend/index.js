@@ -1,7 +1,7 @@
 import express from "express";
 import {PORT, mongoDBURL} from "./config.js";
 import mongoose from "mongoose";
-import {MediaContent} from './models/mediaContentModel.js';
+import userRoute from './routes/userRoute.js';
 import mediaContentRoute from './routes/mediaContentRoute.js';
 import cors from 'cors';
 
@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/mediaContents', mediaContentRoute);
+app.use('/users', userRoute);
 
 mongoose
     .connect(mongoDBURL)
