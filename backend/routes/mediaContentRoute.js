@@ -1,5 +1,6 @@
 import express from 'express';
 import {MediaContent} from '../models/mediaContentModel.js';
+import {User} from '../models/users.js';
 
 const router =  express.Router();
 
@@ -10,6 +11,7 @@ router.get('/', async (req, res) => {
         const search = req.query.search || "";
         let sort = req.query.sort || "views";
         let type = req.query.type || "All";
+        const userId = req.query.userId;
 
         const typeOptions = ["article", "video", "audio", "image"];
 
@@ -25,7 +27,7 @@ router.get('/', async (req, res) => {
             sortBy[sort[0]] = "asc";
         }
 
-        const mediaContents = await MediaContent.find({title: {$regex: search, $options: "i"}})
+        const mediaContents = await MediaContent.find({user: userId, title: {$regex: search, $options: "i"}})
             .where("type")
             .in([...type])
             .sort(sortBy)
@@ -33,6 +35,7 @@ router.get('/', async (req, res) => {
             .limit(limit);
 
         const total = await MediaContent.countDocuments({
+            user: userId,
             type: {$in: [...type]},
             title: {$regex: search, $options: "i"},
         });
@@ -80,7 +83,8 @@ router.post('/', async (req, res) => {
             !req.body.publishDate ||
             !req.body.views ||
             !req.body.likes ||
-            !req.body.comments 
+            !req.body.comments ||
+            !req.body.userId
         ) {
             return res.status(400).send({
                 message: 'Send all the required fields: title, type, description, contentUrl, tags, publishDate, views, likes, comments',
@@ -96,6 +100,7 @@ router.post('/', async (req, res) => {
             views: req.body.views,
             likes: req.body.likes,
             comments: req.body.comments,
+            user: req.body.userId,
         };
         const mediaContent = await MediaContent.create(newMediaContent);
 

@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
 
     const login = (userData) => {
+        console.log('Login user data:', userData);
         setUser(userData);
     };
 

@@ -33,7 +33,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-    .get(`http://localhost:5555/mediaContents?page=${page}&sort=${sort.sort},${
+    .get(`http://localhost:5555/mediaContents?userId=${user._id}&page=${page}&sort=${sort.sort},${
       sort.order
     }&type=${filterType.toString()}&search=${search}`)
     .then((response) => {
@@ -44,20 +44,34 @@ const Home = () => {
       console.log(error);
       setLoading(false);
     });
-  }, [page, sort, filterType, search]);
+  }, [page, sort, filterType, search, user]);
   
   return (
     <div className='p-4'>
       <nav>
-        {user ? (
-          <>
-          <span>{user.name}</span>
-          <button onClick={logout}>Logout</button>
-          </>
-        ) : (
-          <Link to="/users/register">Login</Link>
-        )}
-      </nav>
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="flex space-x-4">
+          {user ? (
+            <>
+              <span>Welcome, {user.name}</span>
+              <button
+                onClick={logout}
+                className="text-white bg-red-500 px-3 py-1 rounded hover:bg-red-700"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/users/register"
+              className="text-white bg-green-500 px-3 py-1 rounded hover:bg-green-700"
+            >
+              Login
+            </Link>
+          )}
+        </div>
+      </div>
+    </nav>
       <div className='flex justify-center items-center gap-x-4'>
         <button
           className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
