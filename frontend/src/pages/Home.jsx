@@ -87,11 +87,11 @@ const Home = () => {
         </button>
       </div>
       <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Media Content List</h1>
+        <h1 className='text-3xl my-8'>Media Contents</h1>
         <Link to='/mediaContents/create'>
           <MdOutlineAddBox className='text-sky-800 text-4xl' />
         </Link>
-        <div className="filter_container">
+        <div className="filter_container flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 p-4 bg-green-200 rounded-lg shadow-md">
         <Search setSearch={(search) => setSearch(search)} />
         <Type
               filterType={filterType}

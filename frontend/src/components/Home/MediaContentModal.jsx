@@ -16,10 +16,6 @@ const MediaContentModal = ({ mediaContent, onClose }) => {
           className='absolute right-6 top-6 text-3xl text-red-600 cursor-pointer'
           onClick={onClose}
         />
-        <h2 className='w-fit px-4 py-1 bg-red-300 rounded-lg'>
-          {mediaContent.publishDate}
-        </h2>
-        <h4 className='my-2 text-gray-500'>{mediaContent._id}</h4>
         <div className='flex justify-start items-center gap-x-2'>
           <PiBookOpenTextLight className='text-red-300 text-2xl' />
           <h2 className='my-1'>{mediaContent.title}</h2>
